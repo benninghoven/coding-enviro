@@ -17,4 +17,5 @@ fi
 
 
 precmd () { vcs_info }
-PROMPT='%F{5}[%F{2}%n%F{5}] %F{3}%3~ ${vcs_info_msg_0_} %f%# '
+PROMPT='%F{5}[%F{2}%n@${${(%):-%m}#Devins-}%F{5}] %F{3}%3~ ${vcs_info_msg_0_} %f%# '
+#PROMPT='%F{5}[%F{2}%n@%F{5}] %F{3}%3~ ${vcs_info_msg_0_} %f%# '
