@@ -1,5 +1,23 @@
 #! /bin/bash
 
+read -p "import or export environment (i/e)?" INP
+
+echo $INP
+
+
+if [ $INP = "i" ]; then
+    echo "import selected"
+elif [ $INP = "e" ]; then
+    echo "export selected"
+else
+    echo "you chose death"
+    exit
+fi
+
+exit
+
+echo "YEET"
+
 source findCurrentOSType.sh # load function from file
 findCurrentOSType
 
