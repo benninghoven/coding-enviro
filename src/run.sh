@@ -1,27 +1,44 @@
-#! /bin/bash
+#!/bin/bash
+
+check() {
+    # make sure it is zsh on OSX with brew
+    echo "checking"
+}
+
+imp() {
+    echo "[WARNING] this will replace most of your rc files"
+    read -p "continue? (Y/n)" DOG
+    [[ ! "$DOG" = "Y"]] && exit
+
+    echo "importing started"
+    exit
+
+    
+
+    cp .zshrc ~
+    echo "copied .zshrc to home dir"
+    cp .vimrc ~
+    echo "copied .vimrc to home dir"
+}
+
+exp() {
+    echo "exporting"
+}
+
 
 read -p "import or export environment (i/e)?" INP
 
-echo $INP
-
-FLAG=-1
-
-
 if [ $INP = "i" ]; then
-    echo "import selected"
-    FLAG=1
+    imp
 elif [ $INP = "e" ]; then
-    echo "export selected"
-    FLAG=0
+    exp
 else
     echo "you chose death"
+    echo "exiting..."
     exit
 fi
 
-if [ $FLAG -eq 1 ]; then
-    echo "importing bobby"
-fi
-
+echo "done"
 exit
 
 echo "YEET"

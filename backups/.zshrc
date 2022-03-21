@@ -1,5 +1,5 @@
-source ~/.config/zsh-git-prompt.sh
 #= Visual
+source ~/.config/zsh-git-prompt.sh
 neofetch
 #= Utility
 alias rf="clear;neofetch"
