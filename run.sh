@@ -4,19 +4,29 @@ read -p "import or export environment (i/e)?" INP
 
 echo $INP
 
+FLAG=-1
+
 
 if [ $INP = "i" ]; then
     echo "import selected"
+    FLAG=1
 elif [ $INP = "e" ]; then
     echo "export selected"
+    FLAG=0
 else
     echo "you chose death"
     exit
 fi
 
+if [ $FLAG -eq 1 ]; then
+    echo "importing bobby"
+fi
+
 exit
 
 echo "YEET"
+# auto suggest type beat for local sourcing
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
 
 source findCurrentOSType.sh # load function from file
 findCurrentOSType
