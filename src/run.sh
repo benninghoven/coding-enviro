@@ -21,6 +21,7 @@ imp() {
     cp $CONFILES/tmux.conf $HOME/.tmux.conf
     cp $CONFILES/vimrc $HOME/.vimrc
     cp $CONFILES/zshrc $HOME/.zshrc
+    cp $CONFILES/zsh-git-prompt.sh $HOME/.config
     
     echo "importing finished ✅"
 }
