@@ -1,4 +1,6 @@
 #!/bin/bash
+PARENTDIR=$(cd ../ && pwd)
+CONFILES=$PARENTDIR/confiles
 
 check() {
     # make sure it is zsh on OSX with brew
@@ -8,21 +10,24 @@ check() {
 imp() {
     echo "[WARNING] this will replace most of your rc files"
     read -p "continue? (Y/n)" DOG
-    [[ ! "$DOG" = "Y"]] && exit
 
-    echo "importing started"
-    exit
+    DOG=$(echo "$DOG" | tr '[:upper:]' '[:lower:]')
+    [ ! "$DOG" = "y" ] &&  exit
 
+    echo "importing started 🦑"
+
+    mkdir -p $HOME/.config/neofetch
+    cp $CONFILES/config.conf $HOME/.config/neofetch
+    cp $CONFILES/tmux.conf $HOME/.tmux.conf
+    cp $CONFILES/vimrc $HOME/.vimrc
+    cp $CONFILES/zshrc $HOME/.zshrc
     
-
-    cp .zshrc ~
-    echo "copied .zshrc to home dir"
-    cp .vimrc ~
-    echo "copied .vimrc to home dir"
+    echo "importing finished ✅"
 }
 
 exp() {
     echo "exporting"
+    
 }
 
 
@@ -37,32 +42,3 @@ else
     echo "exiting..."
     exit
 fi
-
-echo "done"
-exit
-
-echo "YEET"
-# auto suggest type beat for local sourcing
-git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
-
-source findCurrentOSType.sh # load function from file
-findCurrentOSType
-
-OSX="OSX"
-
-if [ $CURRENT_OS != $OSX ]; then
-    echo "installing packages with apt"
-else
-    echo "installing packages with brew"
-fi
-
-source dracula-install.sh
-
-cp .vimrc ~/.vimrc
-echo "custom .vimrc deployed"
-
-cp .zshrc ~/.zshrc
-echo "custom .zshrc deployed"
-
-cp zsh-git-prompt.sh ~/.config/
-echo "zsh prompt moved to .config"
