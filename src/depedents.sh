@@ -3,7 +3,9 @@
 BIN=/usr/local/bin
 LOCAL=/usr/local
 
-[ ! -d $LOCAL/Homebrew ] && /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || echo brew already installed 🐡
+BREW=$(which brew)
+
+[ ! -f $BREW ] && /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || echo brew already installed 🐡
 [ ! -f /bin/zsh ] && brew install zsh || echo zsh already installed 👽
 [ ! -f $BIN/git ] && brew install git || echo git already installed 🐟
 [ ! -d $HOME/.zsh/zsh-autosuggestions ] && git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions || echo zsh-autosuggestions already installed 🦑
@@ -20,3 +22,4 @@ LOCAL=/usr/local
 [ ! -f $BIN/neofetch ] && brew install neofetch || echo neofetch already installed 🍎
 [ ! -f $BIN/TMUX ] && brew install tmux || echo tmux already installed 💻
 [ ! -f $BIN/htop ] && brew install htop || echo htop already installed 😀
+
