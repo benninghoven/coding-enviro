@@ -9,10 +9,10 @@ check() {
 
 imp() {
     echo "[WARNING] this will replace most of your rc files"
-    read -p "continue? (Y/n)" DOG
+    #read -p "continue? (Y/n)" DOG
 
-    DOG=$(echo "$DOG" | tr '[:upper:]' '[:lower:]')
-    [ ! "$DOG" = "y" ] &&  exit
+    #DOG=$(echo "$DOG" | tr '[:upper:]' '[:lower:]')
+    #[ ! "$DOG" = "y" ] &&  exit
 
     echo "importing started 🦑"
 
@@ -29,6 +29,10 @@ exp() {
     echo "exporting"
     
 }
+
+imp
+
+exit
 
 
 read -p "import or export environment (i/e)?" INP
