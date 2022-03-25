@@ -30,6 +30,9 @@ imp() {
 
 exp() {
     echo "exporting"
+
+    #brew leaves shows all non formulae
+    #brew list --cask > casks
     
 }
 
