@@ -6,13 +6,21 @@ DEPENDENTS=$PARENTDIR/dependents
 
 BREWS=$DEPENDENTS/brews
 CASKS=$DEPENDENTS/casks
+#Homebrew on Linux is only supported on Intel processors!
+
+CheckKernel(){
+    [[ "$(uname)" == "Darwin" ]] && echo MAC FANBOY USING BREW || echo linux chad using apt
+}
+
+CheckKernel
+exit
 
 # INSTALLING HOMEBREW
 AddPath(){
     echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> $HOME/.zprofile
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 }
-hash brew 2>/dev/null && echo 🍺 Homebrew installed || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)";AddPath
+hash brew 2>/dev/null && echo 🍺 Homebrew installed || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 #########################
 #         BREWS         #
