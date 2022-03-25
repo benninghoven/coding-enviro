@@ -8,7 +8,7 @@ BREWS=$DEPENDENTS/brews
 CASKS=$DEPENDENTS/casks
 
 # INSTALLING HOMEBREW
-[[ $(which brew) == "brew not found" ]] && /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || echo ✅ Homebrew already installed
+hash brew 2>/dev/null && echo 🍺 Homebrew installed || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 #########################
 #         BREWS         #
