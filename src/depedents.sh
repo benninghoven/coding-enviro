@@ -13,7 +13,9 @@ InstallBrew(){
 }
 
 InstallAPT(){
-    echo installing apt and packages
+    echo installing packages
+    sudo apt-get update && sudo apt-get dist-upgrade -y
+    sudo apt-get install build-essential curl file git
 }
 
 InstallPackages(){
