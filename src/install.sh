@@ -3,7 +3,7 @@
 echo "Installinng Benninghoven Environment"
 
 echo changing default logan shell to zsh 👏
-[[ "$(which zsh)" == *"not found"* ]] && echo need to install zsh || echo zsh found
+command -v zsh >/dev/null 2>&1 || { echo >&2 "I require zsh but it's not installed.  Aborting."; exit 1; }
 
 chsh -s $(which zsh)
 
