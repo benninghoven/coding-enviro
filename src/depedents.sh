@@ -7,18 +7,21 @@ DEPENDENTS=$PARENTDIR/dependents
 BREWS=$DEPENDENTS/brews
 CASKS=$DEPENDENTS/casks
 #Homebrew on Linux is only supported on Intel processors!
-
-InstallBrew(){
+Update(){
+    sudo apt-get update && sudo apt-get dist-upgrade -y
+    sudo apt-get install build-essential curl file git
+}
+InstallBrewPacks(){
     echo installing brew and packages
 }
 
-InstallAPT(){
+InstallAPTPacks(){
     echo installing packages
-    [[ $(sudo -l 2>/dev/null) ]] && {sudo apt-get update && sudo apt-get dist-upgrade -y; sudo apt-get install build-essential curl file git}
+    [[ $(sudo -l 2>/dev/null) ]] && Update
 }
 
 InstallPackages(){
-    [[ "$(uname)" == "Darwin" ]] && InstallBrew || InstallAPT
+    [[ "$(uname)" == "Darwin" ]] && InstallBrewPacks || InstallAPTPacks
 }
 
 InstallPackages
