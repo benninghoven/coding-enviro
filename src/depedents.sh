@@ -6,14 +6,11 @@ DEPENDENTS=$PARENTDIR/dependents
 
 BREWS=$DEPENDENTS/brews
 CASKS=$DEPENDENTS/casks
-#Homebrew on Linux is only supported on Intel processors!
+
+#= LINUX
 Update(){
     sudo apt-get update && sudo apt-get dist-upgrade -y
     sudo apt-get install build-essential curl file git
-}
-InstallBrewPacks(){
-    echo installing brew and packages
-    hash brew 2>/dev/null && echo 🍺 Homebrew installed || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 }
 
 InstallAPTPacks(){
@@ -21,8 +18,40 @@ InstallAPTPacks(){
     [[ $(sudo -l 2>/dev/null) ]] && Update
 }
 
+#= MAC OS
+InstallBrewPacks(){
+    echo checking Homebrew 🍺
+    TEMPY=$(mktemp)
+    brew leaves > $TEMPY
+    for BREW in $(cat $BREWS)
+    do  
+        grep $BREW $TEMPY &> /dev/null
+        [ $? == 0 ] && echo ✅ $BREW || brew install $BREW
+    done
+}
+InstallBrewCasks(){
+    echo checking Homebrew Formulae 🍻
+    brew list --cask > $TEMPY
+    for CASK in $(cat $CASKS) # for every cask in file, install to machine if not found
+    do
+        grep $CASK $TEMPY &> /dev/null
+        [ $? == 0 ] && echo ✅ $CASK || brew install --cask $CASK
+    done
+}
+
+InstallBrew(){
+    echo installing brew and packages
+    # install brew
+    hash brew 2>/dev/null && echo 🍺 Homebrew installed || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    # install basic packages
+    InstallBrewPacks
+    # ask to install formulae
+    InstallBrewCasks
+
+}
+
 InstallPackages(){
-    [[ "$(uname)" == "Darwin" ]] && InstallBrewPacks || InstallAPTPacks
+    [[ "$(uname)" == "Darwin" ]] && InstallBrew || InstallAPTPacks
 }
 
 InstallPackages
@@ -31,30 +60,10 @@ exit
 #########################
 #         BREWS         #
 #########################
-echo checking Homebrew 🍺
-TEMPY=$(mktemp)
-brew leaves > $TEMPY
-
-for BREW in $(cat $BREWS)
-do  
-    grep $BREW $TEMPY &> /dev/null
-    [ $? == 0 ] && echo ✅ $BREW || brew install $BREW
-done
 
 #########################
 #         CASKS         #
 #########################
-
-InstallCasks(){
-    echo checking Homebrew Formulae 🍻
-    brew list --cask > $TEMPY
-    for CASK in $(cat $CASKS) # for every cask in file, install to machine if not found
-    do
-        grep $CASK $TEMPY &> /dev/null
-        [ $? == 0 ] && echo ✅ $CASK || brew install --cask $CASK
-
-    done
-}
 
 OS=$(uname)
 [[ $OS == "Darwin" ]] && InstallCasks || echo linux chad
