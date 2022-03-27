@@ -8,11 +8,19 @@ BREWS=$DEPENDENTS/brews
 CASKS=$DEPENDENTS/casks
 #Homebrew on Linux is only supported on Intel processors!
 
-CheckKernel(){
-    [[ "$(uname)" == "Darwin" ]] && echo MAC FANBOY USING BREW || echo linux chad using apt
+InstallBrew(){
+    echo installing brew and packages
 }
 
-CheckKernel
+InstallAPT(){
+    echo installing apt and packages
+}
+
+InstallPackages(){
+    [[ "$(uname)" == "Darwin" ]] && InstallBrew || InstallAPT
+}
+
+InstallPackages
 exit
 
 # INSTALLING HOMEBREW
