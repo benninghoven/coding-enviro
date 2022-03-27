@@ -14,6 +14,7 @@ InstallBrew(){
 
 InstallAPT(){
     echo installing packages
+    [[ "$(sudo -l 2>&1 /dev/null)" == *"Sorry"* ]] || echo no sudo rights rip
     sudo apt-get update && sudo apt-get dist-upgrade -y
     sudo apt-get install build-essential curl file git
 }
