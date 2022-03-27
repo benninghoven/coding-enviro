@@ -13,6 +13,7 @@ Update(){
 }
 InstallBrewPacks(){
     echo installing brew and packages
+    hash brew 2>/dev/null && echo 🍺 Homebrew installed || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 }
 
 InstallAPTPacks(){
@@ -26,13 +27,6 @@ InstallPackages(){
 
 InstallPackages
 exit
-
-# INSTALLING HOMEBREW
-AddPath(){
-    echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> $HOME/.zprofile
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-}
-hash brew 2>/dev/null && echo 🍺 Homebrew installed || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 #########################
 #         BREWS         #
