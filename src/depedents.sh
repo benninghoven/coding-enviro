@@ -4,13 +4,16 @@ PARENTDIR=$(cd ../ && pwd)
 CONFILES=$PARENTDIR/confiles
 DEPENDENTS=$PARENTDIR/dependents
 
-BREWS=$DEPENDENTS/brews
-CASKS=$DEPENDENTS/casks
-
 #= LINUX
 Update(){
+    # need sudo privs for these
     sudo apt-get update && sudo apt-get dist-upgrade -y
     sudo apt-get install build-essential curl file git
+    sudo apt-get install -y zsh-syntax-highlighting
+    echo "# MUST BE SOURCED AT BOTTOM OF ZSHRC"
+    echo "source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> $HOME/.zshrc
+    # FIXME source the install in zshrc
+    # source file > $HOME/.zshrc
 }
 
 InstallAPTPacks(){
@@ -20,6 +23,7 @@ InstallAPTPacks(){
 
 #= MAC OS
 InstallBrewPacks(){
+    BREWS=$DEPENDENTS/brews
     echo checking Homebrew 🍺
     TEMPY=$(mktemp)
     brew leaves > $TEMPY
@@ -30,6 +34,7 @@ InstallBrewPacks(){
     done
 }
 InstallBrewCasks(){
+    CASKS=$DEPENDENTS/casks
     echo checking Homebrew Formulae 🍻
     brew list --cask > $TEMPY
     for CASK in $(cat $CASKS) # for every cask in file, install to machine if not found
@@ -54,33 +59,24 @@ InstallPackages(){
     [[ "$(uname)" == "Darwin" ]] && InstallBrew || InstallAPTPacks
 }
 
-InstallPackages
-exit
+InstallGits(){
+    # Auto Suggest
+    [ ! -d $HOME/.zsh/zsh-autosuggestions ] && git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions || echo zsh-autosuggestions already installed 🦑
+    echo "#MUST LEAVE THIS AT THE BOTTOM OF ZSHRC!" >> $HOME/.zshrc
+    echo "source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" >> $HOME/.zshrc
 
-#########################
-#         BREWS         #
-#########################
+    # Vim Theme 🧛
+    [ ! -d $HOME/.vim/pack/themes/start ] && mkdir -p ~/.vim/pack/themes/start || echo vim themes dir already created ✅
+    [ ! -d $HOME/.vim/pack/themes/start/dracula ] && git clone https://github.com/dracula/vim.git ~/.vim/pack/themes/start/dracula || echo dracula theme already installed 🧛
 
-#########################
-#         CASKS         #
-#########################
+}
 
-OS=$(uname)
-[[ $OS == "Darwin" ]] && InstallCasks || echo linux chad
+Install(){
+    echo "installing needed software"
+    InstallPackages
+    InstallGits
+    echo "finished installing needed software"
 
-exit
+}
 
-# FIXME: make this dynamic!
-# hard code check each dir where git repo should be
-
-[ ! -d $HOME/.zsh/zsh-autosuggestions ] && git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions || echo zsh-autosuggestions already installed 🦑
-[ ! -d $LOCAL/share/zsh-syntax-highlighting ] && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git || echo zsh syntax highlighting already installed 🍣
-[ ! -d $HOME/.vim/pack/themes/start ] && mkdir -p ~/.vim/pack/themes/start || echo vim themes dir already created ✅
-[ ! -d $HOME/.vim/pack/themes/start/dracula ] && git clone https://github.com/dracula/vim.git ~/.vim/pack/themes/start/dracula || echo dracula theme already installed 🧛
-
-# FOR WSL
-#test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
-#test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-#test -r ~/.bash_profile && echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile
-#echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
-# will make if doesn't exist
+Install
