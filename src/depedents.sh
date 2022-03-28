@@ -12,11 +12,10 @@ Update(){
     sudo apt-get install -y zsh-syntax-highlighting
     # move zsh syntax highlighitng to hide it
     [ -d $HOME/zsh-syntax-highlighting ] && mv $HOME/zsh-syntax-highlighting $HOME/.zsh-syntax-highlighting
-    echo "# MUST BE SOURCED AT BOTTOM OF ZSHRC" >> $HOME/.zshrc
     TEMP=""
     [[ "$(uname)" == "Darwin" ]] && TEMP="/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" || TEMP="$HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
     grep "zsh-syntax-highlighting.zsh" $HOME/.zshrc &> /dev/null
-    [ $? == 0 ] || echo "source $TEMP" >> $HOME/.zshrc
+    [ $? == 0 ] || { echo "# SYNTAX HIGHLIGHTING MUST BE SOURCED AT BOTTOM OF ZSHRC" >> $HOME/.zshrc; echo "source $TEMP" >> $HOME/.zshrc; }
 }
 
 InstallAPTPacks(){
