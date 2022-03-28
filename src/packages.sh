@@ -66,7 +66,8 @@ InstallGits(){
     [ ! -d $HOME/.zsh/zsh-autosuggestions ] && git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions || echo zsh-autosuggestions already installed 🦑
     grep "zsh-autosuggestions.zsh" $HOME/.zshrc &> /dev/null
     [ $? == 0 ] || { sed -i "1i source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" $HOME/.zshrc;sed -i "1i #= COMMAND LINE GOODIES" $HOME/.zshrci; } && echo "AUTO SUGGESTIONS ALREADY IN ZSHRC FILE 🤣"
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.config
+    # Zsh Syntax Highlighting
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.config/zsh-syntax-highlighting
 
     # Vim Theme 🧛
     [ ! -d $HOME/.vim/pack/themes/start ] && mkdir -p ~/.vim/pack/themes/start || echo vim themes dir already created ✅
