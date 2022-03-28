@@ -11,10 +11,10 @@ Update(){
     sudo apt-get install build-essential curl file git
     sudo apt-get install -y zsh-syntax-highlighting
     # move zsh syntax highlighitng to hide it
-    [ -d $HOME/zsh-snytax-highlighting ] && mv $HOME/zsh-syntax-highlighting $HOME/.zsh-syntax-highlighting
+    [ -d $HOME/zsh-syntax-highlighting ] && mv $HOME/zsh-syntax-highlighting $HOME/.zsh-syntax-highlighting
     echo "# MUST BE SOURCED AT BOTTOM OF ZSHRC" >> $HOME/.zshrc
     TEMP=""
-    [[ "$(uname)" == "Darwin" ]] && $TEMP="/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" || $TEMP="$HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+    [[ "$(uname)" == "Darwin" ]] && TEMP="/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" || TEMP="$HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
     echo "source $TEMP" >> $HOME/.zshrc
     # FIXME source the install in zshrc
     # source file > $HOME/.zshrc
@@ -66,8 +66,8 @@ InstallPackages(){
 InstallGits(){
     # Auto Suggest
     [ ! -d $HOME/.zsh/zsh-autosuggestions ] && git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions || echo zsh-autosuggestions already installed 🦑
-    echo "#MUST LEAVE THIS AT THE BOTTOM OF ZSHRC!" >> $HOME/.zshrc
-    echo "source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" >> $HOME/.zshrc
+    grep "zsh-autosuggestions.zsh" $HOME/.zshrc &> /dev/null
+    [ $? == 0 ] || { sed -i "1i source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" $HOME/.zshrc;sed -i "1i #= COMMAND LINE GOODIES" $HOME/.zshrci; }
 
     # Vim Theme 🧛
     [ ! -d $HOME/.vim/pack/themes/start ] && mkdir -p ~/.vim/pack/themes/start || echo vim themes dir already created ✅
