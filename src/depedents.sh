@@ -15,9 +15,8 @@ Update(){
     echo "# MUST BE SOURCED AT BOTTOM OF ZSHRC" >> $HOME/.zshrc
     TEMP=""
     [[ "$(uname)" == "Darwin" ]] && TEMP="/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" || TEMP="$HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-    echo "source $TEMP" >> $HOME/.zshrc
-    # FIXME source the install in zshrc
-    # source file > $HOME/.zshrc
+    grep "zsh-syntax-highlighting.zsh" $HOME/.zshrc &> /dev/null
+    [ $? == 0 ] || echo "source $TEMP" >> $HOME/.zshrc
 }
 
 InstallAPTPacks(){
