@@ -7,17 +7,14 @@ Update(){
     # need sudo privs for these
     sudo apt-get update && sudo apt-get dist-upgrade -y
     sudo apt-get install build-essential curl file git
-    echo installing zsh-syntax-highlighting 🚀
-    sudo apt-get install -y zsh-syntax-highlighting
     # move zsh syntax highlighitng to hide it
     # SYNTAX IS EITHER IN .zsh, zsh-syntax- or usr/local/share if mac
     #[ -d $HOME/zsh-syntax-highlighting ] && mv $HOME/zsh-syntax-highlighting $HOME/.zsh-syntax-highlighting
     TEMP=""
-    [[ "$(uname)" == "Darwin" ]] && TEMP="/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" || TEMP="$HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-    [ -d $HOME/.zsh ] && TEMP= "$HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-
+    [[ "$(uname)" == "Darwin" ]] && TEMP="/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" || TEMP="$HOME/.config/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
     grep "zsh-syntax-highlighting.zsh" $HOME/.zshrc &> /dev/null
     [ $? == 0 ] || { echo "# SYNTAX HIGHLIGHTING MUST BE SOURCED AT BOTTOM OF ZSHRC" >> $HOME/.zshrc; echo "source $TEMP" >> $HOME/.zshrc; }
+
     sudo apt autoremove
 }
 
@@ -69,6 +66,7 @@ InstallGits(){
     [ ! -d $HOME/.zsh/zsh-autosuggestions ] && git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions || echo zsh-autosuggestions already installed 🦑
     grep "zsh-autosuggestions.zsh" $HOME/.zshrc &> /dev/null
     [ $? == 0 ] || { sed -i "1i source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" $HOME/.zshrc;sed -i "1i #= COMMAND LINE GOODIES" $HOME/.zshrci; } && echo "AUTO SUGGESTIONS ALREADY IN ZSHRC FILE 🤣"
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.config
 
     # Vim Theme 🧛
     [ ! -d $HOME/.vim/pack/themes/start ] && mkdir -p ~/.vim/pack/themes/start || echo vim themes dir already created ✅
