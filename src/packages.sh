@@ -1,5 +1,3 @@
-#!/bin/bash
-
 PARENTDIR=$(cd ../ && pwd)
 CONFILES=$PARENTDIR/confiles
 DEPENDENTS=$PARENTDIR/dependents
@@ -20,8 +18,6 @@ Update(){
 
     grep "zsh-syntax-highlighting.zsh" $HOME/.zshrc &> /dev/null
     [ $? == 0 ] || { echo "# SYNTAX HIGHLIGHTING MUST BE SOURCED AT BOTTOM OF ZSHRC" >> $HOME/.zshrc; echo "source $TEMP" >> $HOME/.zshrc; }
-
-
     sudo apt autoremove
 }
 
@@ -87,5 +83,3 @@ Install(){
     echo "finished installing needed software"
 
 }
-
-Install

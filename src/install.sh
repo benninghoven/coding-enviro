@@ -1,12 +1,16 @@
 #!/bin/bash
+source ./packages.sh
+source ./setshell.sh
+source ./config.sh
 
-echo "Installinng Benninghoven Environment"
+echo "installinng benninghoven coding environment 🦑"
 
-echo changing default logan shell to zsh 👏
-command -v zsh >/dev/null 2>&1 || { echo >&2 "I require zsh but it's not installed.  Aborting."; exit 1; }
+# Install PACKAGES including important such as ZSH and utilities (Mac/Linux)
+# Install git stuff for (Both)
+Install
+# Make ZSH Default (Both)
+ChangeShellToZsh
+# Copy rc and config files to local machine (Both)
+ImportConfigFiles
 
-chsh -s $(which zsh)
-
-
-#chsh -s /bin/bash $USER
-
+echo "benninghoven coding environment complete 🦑"
