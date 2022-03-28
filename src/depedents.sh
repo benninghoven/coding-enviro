@@ -10,8 +10,12 @@ Update(){
     sudo apt-get update && sudo apt-get dist-upgrade -y
     sudo apt-get install build-essential curl file git
     sudo apt-get install -y zsh-syntax-highlighting
-    echo "# MUST BE SOURCED AT BOTTOM OF ZSHRC"
-    echo "source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> $HOME/.zshrc
+    # move zsh syntax highlighitng to hide it
+    [ -d $HOME/zsh-snytax-highlighting ] && mv $HOME/zsh-syntax-highlighting $HOME/.zsh-syntax-highlighting
+    echo "# MUST BE SOURCED AT BOTTOM OF ZSHRC" >> $HOME/.zshrc
+    TEMP=""
+    [[ "$(uname)" == "Darwin" ]] && $TEMP="/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" || $TEMP="$HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+    echo "source $TEMP" >> $HOME/.zshrc
     # FIXME source the install in zshrc
     # source file > $HOME/.zshrc
 }
