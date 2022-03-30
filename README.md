@@ -1,5 +1,4 @@
-# run the script found in src/install.sh to get started
+# A simple script I use for my developing environment with vim and zsh
 
-'''./src/install.sh'''
-
-It includes the files necesarry for my developing environment with vim and zsh
+# Install
+```./src/install.sh```
