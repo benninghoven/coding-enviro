@@ -1,8 +1,8 @@
-"call plug#begin()
+call plug#begin()
 
-"	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-"call plug#end()
+call plug#end()
 
 set number
 " set nonumber
@@ -23,9 +23,11 @@ set backspace=indent,eol,start
 set belloff=all
 set ic
 
+
 syntax on
 packadd! dracula
 colorscheme dracula
+
 hi Normal guibg=NONE ctermbg=NONE
 
 au BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal! g'\"" | endif

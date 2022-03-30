@@ -10,10 +10,9 @@ Update(){
     # move zsh syntax highlighitng to hide it
     # SYNTAX IS EITHER IN .zsh, zsh-syntax- or usr/local/share if mac
     #[ -d $HOME/zsh-syntax-highlighting ] && mv $HOME/zsh-syntax-highlighting $HOME/.zsh-syntax-highlighting
-    TEMP=""
-    [[ "$(uname)" == "Darwin" ]] && TEMP="/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" || TEMP="$HOME/.config/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-    grep "zsh-syntax-highlighting.zsh" $HOME/.zshrc &> /dev/null
-    [ $? == 0 ] || { echo "# SYNTAX HIGHLIGHTING MUST BE SOURCED AT BOTTOM OF ZSHRC" >> $HOME/.zshrc; echo "source $TEMP" >> $HOME/.zshrc; }
+    #[[ "$(uname)" == "Darwin" ]] && TEMP="/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" || TEMP="$HOME/.config/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+    #grep "zsh-syntax-highlighting.zsh" $HOME/.zshrc &> /dev/null
+    #[ $? == 0 ] || { echo "# SYNTAX HIGHLIGHTING MUST BE SOURCED AT BOTTOM OF ZSHRC" >> $HOME/.zshrc; echo "source $TEMP" >> $HOME/.zshrc; }
 
     sudo apt autoremove
 }
@@ -61,24 +60,3 @@ InstallPackages(){
     [[ "$(uname)" == "Darwin" ]] && InstallBrew || InstallAPTPacks
 }
 
-InstallGits(){
-    # Auto Suggest
-    [ ! -d $HOME/.zsh/zsh-autosuggestions ] && git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions || echo zsh-autosuggestions already installed 🦑
-    grep "zsh-autosuggestions.zsh" $HOME/.zshrc &> /dev/null
-    [ $? == 0 ] || { sed -i "1i source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" $HOME/.zshrc; sed -i "1i #= COMMAND LINE GOODIES" $HOME/.zshrc; } && echo "AUTO SUGGESTIONS ALREADY IN ZSHRC FILE 🤣"
-    # Zsh Syntax Highlighting
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.config/zsh-syntax-highlighting
-
-    # Vim Theme 🧛
-    [ ! -d $HOME/.vim/pack/themes/start ] && mkdir -p ~/.vim/pack/themes/start || echo vim themes dir already created ✅
-    [ ! -d $HOME/.vim/pack/themes/start/dracula ] && git clone https://github.com/dracula/vim.git ~/.vim/pack/themes/start/dracula || echo dracula theme already installed 🧛
-
-}
-
-Install(){
-    echo "installing needed software"
-    InstallPackages
-    InstallGits
-    echo "finished installing needed software"
-
-}
