@@ -1,8 +1,13 @@
 #!/bin/bash
 
 CheckSudo(){
-    [[ $(sudo -l 2>/dev/null) ]] && return true || return false
+    echo "checking for privilege 🔎"
+    [[ $(sudo -l 2>/dev/null) ]] && { true;return; } || { false;return; }
 }
 
-[[ CheckSudo ]] && echo you have priv || echo you have no priv
-
+# HOW TO USE
+#if CheckSudo; then
+#        echo you got privilege
+#else
+#        echo no privilege for u
+#fi
