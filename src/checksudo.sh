@@ -1,7 +1,7 @@
 #!/bin/bash
 
 CheckSudo(){
-    echo "checking for privilege 🔎"
+    echo "🔎 checking for privilege"
     [[ $(sudo -l 2>/dev/null) ]] && { true;return; } || { false;return; }
 }
 

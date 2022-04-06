@@ -1,18 +1,35 @@
 #!/bin/bash
-source ./packages.sh
-source ./setshell.sh
-source ./config.sh
-source ./gits.sh
 
-echo "installinng benninghoven coding environment 🦑"
+PARENTDIR=$(cd ../ && pwd)
+CONFILES=$PARENTDIR/confiles
+DEPENDENTS=$PARENTDIR/dependents
+
+# Source files
+for file in *; do 
+    if [ -f "$file" ]; then 
+        [[ "$file" == "install.sh" ]] || {
+            source $file; echo 🍝 $file sauced;
+        }
+    fi 
+done
+
+echo "🦑 installing benninghoven coding environment"
+
+# Install packages based on their kernel
+if CheckSudo; then    
+    [[ $(CheckOS) == "MACOS" ]] && InstallBrew || InstallAPT
+else
+    echo no sudo privileges skipping package install
+fi
+
+# INSTALL GIT / DEPENDENT SOURCE CODE FILES
+#MAKE ZSH DEFAULT
+# ASK about rc and config files to local machine (Both)
 
 # Install PACKAGES including important such as ZSH and utilities (Mac/Linux)
-# Install git stuff for (Both)
-InstallPackages
-# Make ZSH Default (Both)
-ChangeShellToZsh
-# Copy rc and config files to local machine (Both)
-ImportConfigFiles
-InstallGits
+#InstallPackages
+#ChangeShellToZsh
+#ImportConfigFiles
+#InstallGits
 
-echo "benninghoven coding environment complete 🦑"
+echo "🦑 installation complete"
