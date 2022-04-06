@@ -39,38 +39,18 @@ InstallBrewCasks(){
 }
 # LINUX 🐧
 
-InstallAPT(){
-    echo installing apt packs
-
-}
-
-
-
-
-
-
-
-#= LINUX
-Update(){
-    # need sudo privs for these
+InstallAPT(){ # assuming we already have APT
+    echo 🐧 installing apt packs
     sudo apt-get update && sudo apt-get dist-upgrade -y
-    sudo apt-get install build-essential curl file git
-    # move zsh syntax highlighitng to hide it
-    # SYNTAX IS EITHER IN .zsh, zsh-syntax- or usr/local/share if mac
-    #[ -d $HOME/zsh-syntax-highlighting ] && mv $HOME/zsh-syntax-highlighting $HOME/.zsh-syntax-highlighting
-    #[[ "$(uname)" == "Darwin" ]] && TEMP="/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" || TEMP="$HOME/.config/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-    #grep "zsh-syntax-highlighting.zsh" $HOME/.zshrc &> /dev/null
-    #[ $? == 0 ] || { echo "# SYNTAX HIGHLIGHTING MUST BE SOURCED AT BOTTOM OF ZSHRC" >> $HOME/.zshrc; echo "source $TEMP" >> $HOME/.zshrc; }
+    sudo apt-get install build-essential curl file git -y
 
+    TEMPY=$(mktemp)
+    APTS=$DEPENDENTS/apts
+    apt list > $TEMPY
+    for PACK in $(cat $APTS)
+    do  
+        grep $PACK $TEMPY &> /dev/null
+        [ $? == 0 ] && echo ✅ $PACK || sudo apt-get install $PACK
+    done
     sudo apt autoremove
 }
-
-InstallAPTPacks(){
-    echo installing packages
-    [[ $(sudo -l 2>/dev/null) ]] && Update
-}
-
-#= MAC OS
-
-
-
