@@ -1,4 +1,5 @@
 ImportConfigFiles() {
+    # FIXME ADD AUTO BACKUP
     echo "[WARNING] this will replace most of your rc files"
     read -p "continue? (y/N) " DOG
     DOG=$(echo "$DOG" | tr '[:upper:]' '[:lower:]')

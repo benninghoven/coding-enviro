@@ -1,6 +1,10 @@
-InstallGits(){
+InstallDependents(){
+    echo 🤖 checking for dependent files
+    [ -d $HOME/.config ] || mkdir -p $HOME/.config/ && echo "✅ .config directory already exists"
+
     [ ! -d $HOME/.config/zsh ] && mkdir -p $HOME/.config/zsh || echo "zsh config directory already exists"
-    ZSHFG=$HOME/.config/zsh
+    CONFIG=$HOME/.config
+    ZSHFG=$CONFIG/zsh
     
     # Cool git prompt
     [ ! -f $ZSHFG/zsh-git-prompt.sh ] && cp $CONFILES/zsh-git-prompt.sh $ZSHFG || echo cool zsh prompt already installed
@@ -23,4 +27,5 @@ InstallGits(){
 
     #FIXME: Throw in neovim Packages
 
+    echo 🤖 dependent files done
 }

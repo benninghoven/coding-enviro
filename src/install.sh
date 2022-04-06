@@ -24,14 +24,8 @@ fi
 
 ChangeShellToZsh
 
-# INSTALL GIT / DEPENDENT SOURCE CODE FILES
+InstallDependents
 
-# ASK about rc and config files to local machine (Both)
-
-# Install PACKAGES including important such as ZSH and utilities (Mac/Linux)
-#InstallPackages
-#ChangeShellToZsh
-#ImportConfigFiles
-#InstallGits
+ImportConfigFiles
 
 echo "🦑 installation complete"
