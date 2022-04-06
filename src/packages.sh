@@ -37,20 +37,20 @@ InstallBrewCasks(){
         [ $? == 0 ] && echo ✅ $CASK || brew install --cask $CASK
     done
 }
-# LINUX 🐧
 
+# LINUX 🐧
 InstallAPT(){ # assuming we already have APT
     echo 🐧 installing apt packs
     sudo apt-get update && sudo apt-get dist-upgrade -y
     sudo apt-get install build-essential curl file git -y
-
     TEMPY=$(mktemp)
     APTS=$DEPENDENTS/apts
-    apt list > $TEMPY
+    apt list --installed > $TEMPY
     for PACK in $(cat $APTS)
     do  
-        grep $PACK $TEMPY &> /dev/null
-        [ $? == 0 ] && echo ✅ $PACK || sudo apt-get install $PACK
+	cat $TEMPY | grep -i $PACK &> /dev/null
+        [ $? == 0 ] && echo ✅ $PACK || sudo apt-get install $PACK -y
     done
-    sudo apt autoremove
+    sudo apt autoremove -y
+    echo 🐧 finished installing apt packs
 }
