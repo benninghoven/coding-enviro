@@ -41,8 +41,7 @@ InstallBrewCasks(){
 # LINUX 🐧
 InstallAPT(){ # assuming we already have APT
     echo 🐧 installing apt packs
-    sudo apt-get update && sudo apt-get dist-upgrade -y
-    sudo apt-get install build-essential curl file git -y
+    sudo apt-get update && sudo apt-get dist-upgrade -y &>/dev/null
     TEMPY=$(mktemp)
     APTS=$DEPENDENTS/apts
     apt list --installed > $TEMPY
@@ -51,6 +50,6 @@ InstallAPT(){ # assuming we already have APT
 	cat $TEMPY | grep -i $PACK &> /dev/null
         [ $? == 0 ] && echo ✅ $PACK || sudo apt-get install $PACK -y
     done
-    sudo apt autoremove -y
+    sudo apt autoremove -y &>/dev/null
     echo 🐧 finished installing apt packs
 }

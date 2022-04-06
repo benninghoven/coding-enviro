@@ -22,8 +22,10 @@ else
     echo no sudo privileges skipping package install
 fi
 
+ChangeShellToZsh
+
 # INSTALL GIT / DEPENDENT SOURCE CODE FILES
-#MAKE ZSH DEFAULT
+
 # ASK about rc and config files to local machine (Both)
 
 # Install PACKAGES including important such as ZSH and utilities (Mac/Linux)
