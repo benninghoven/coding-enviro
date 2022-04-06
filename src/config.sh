@@ -1,10 +1,8 @@
 ImportConfigFiles() {
-    PARENTDIR=$(cd ../ && pwd)
-    CONFILES=$PARENTDIR/confiles
     echo "[WARNING] this will replace most of your rc files"
-    read -p "continue? (Y/n) " DOG
+    read -p "continue? (y/N) " DOG
     DOG=$(echo "$DOG" | tr '[:upper:]' '[:lower:]')
-    [ ! "$DOG" = "y" ] && exit
+    [ ! "$DOG" = "y" ] || return
 
     echo "importing config files started 🦑"
     # FIXME
@@ -16,5 +14,5 @@ ImportConfigFiles() {
     cp $CONFILES/vimrc $HOME/.vimrc
     cp $CONFILES/zshrc $HOME/.zshrc
     
-    echo "importing config files complete 😎"
+    echo "😎 importing config files complete"
 }
