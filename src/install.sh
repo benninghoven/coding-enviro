@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "🦑 installing benninghoven coding environment"
+
 PARENTDIR=$(cd ../ && pwd)
 CONFILES=$PARENTDIR/confiles
 DEPENDENTS=$PARENTDIR/dependents
@@ -13,8 +15,6 @@ for file in *; do
     fi 
 done
 
-echo "🦑 installing benninghoven coding environment"
-
 # Install packages based on their kernel
 if CheckSudo; then    
     [[ $(CheckOS) == "MACOS" ]] && InstallBrew || InstallAPT
@@ -24,8 +24,8 @@ fi
 
 ChangeShellToZsh
 
-InstallDependents
-
 ImportConfigFiles
+
+InstallDependents
 
 echo "🦑 installation complete"

@@ -26,6 +26,13 @@ InstallDependents(){
     [ ! -d $HOME/.vim/pack/themes/start/dracula ] && git clone https://github.com/dracula/vim.git ~/.vim/pack/themes/start/dracula || echo dracula theme already installed 🧛
 
     #FIXME: Throw in neovim Packages
+    # Vim-plug for coc and neovim
+    #sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+    #   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+
+    # Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+    # echo restart vim and run :PlugInstall
 
     echo 🤖 dependent files done
 }

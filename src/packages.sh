@@ -10,7 +10,7 @@ InstallBrew(){
     # install basic packages
     InstallBrewPacks
     # ask to install formulae
-    read -p "⚠️ install Formulae (Third Party Software) (y/N)" INP
+    read -p "⚠️  install Formulae (Third Party Software) (y/N)" INP
     INP=$(echo "$INP" | tr '[:upper:]' '[:lower:]')
     [ "$INP" = "y" ] && InstallBrewCasks
     echo 🍺 finished Homebrew installation

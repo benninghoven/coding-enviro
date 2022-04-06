@@ -2,7 +2,7 @@
 
 CheckSudo(){
     echo "🔎 checking for privilege"
-    [[ $(sudo -l 2>/dev/null) ]] && { true;return; } || { false;return; }
+    [[ $(sudo -l 2>/dev/null) ]] && { echo 🥳 you have sudo privilege; true; return; } || { echo 😔 you have no sudo privilege; false; return; }
 }
 
 # HOW TO USE
