@@ -5,6 +5,8 @@ InstallDependents(){
     [ ! -d $HOME/.config/zsh ] && mkdir -p $HOME/.config/zsh || echo "zsh config directory already exists"
     CONFIG=$HOME/.config
     ZSHFG=$CONFIG/zsh
+
+    [ -d $CONFIG/nvim ] || { echo creating nevoim directory; mkdir $CONFIG/nvim; } && echo ✅ neovim directory already created
     
     # Cool git prompt
     [ ! -f $ZSHFG/zsh-git-prompt.sh ] && cp $CONFILES/zsh-git-prompt.sh $ZSHFG || echo cool zsh prompt already installed
