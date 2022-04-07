@@ -23,15 +23,12 @@ InstallDependents(){
     grep "zsh-syntax-highlighting.zsh" $HOME/.zshrc &> /dev/null
     [ $? == 0 ] || { echo "# SYNTAX HIGHLIGHTING MUST BE SOURCED AT BOTTOM OF ZSHRC" >> $HOME/.zshrc; echo "source $ZSHFG/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> $HOME/.zshrc; }
 
-
-    # Vim Theme 🧛 (DEPRACATED)
-    [ ! -d $HOME/.vim/pack/themes/start ] && mkdir -p ~/.vim/pack/themes/start || echo vim themes dir already created ✅
-    [ ! -d $HOME/.vim/pack/themes/start/dracula ] && git clone https://github.com/dracula/vim.git ~/.vim/pack/themes/start/dracula || echo dracula theme already installed 🧛
-
-    #FIXME: Throw in neovim Packages
     # Vim-plug for coc and neovim
     [ -d $HOME/.local/share/nvim ] && echo ✅ vim-plug already installed || { sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'; }
+
+    # FIXME CHECK IF WE NEED TO INSTALL NODE
+    curl -sL install-node.vercel.app/lts | bash
 
     echo 🤖 dependent files done
 }
