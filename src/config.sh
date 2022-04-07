@@ -1,17 +1,6 @@
 # DO THEY EXIST
 # IF SO MAKE A BACK UP
 
-# COPY THESE BOYS
-# ~/.config/nvim/init.nvim
-# ~zshrc
-# ~.tmux.conf
-# ./config/neofetch/config.conf
-
-
-
-
-
-
 ImportConfigFiles() {
     # FIXME ADD AUTO BACKUP
     read -p "☢️  use benninghoven configuration files? (y/N) " DOG
@@ -20,6 +9,7 @@ ImportConfigFiles() {
 
     echo "😎 importing config files started"
     # FIXME
+    # folders should exist already, but you never know
     [ ! -d $HOME/.config/neofetch ] && mkdir -p $HOME/.config/neofetch
 
     cp $CONFILES/config.conf $HOME/.config/neofetch/config.conf
@@ -27,6 +17,7 @@ ImportConfigFiles() {
     cp $CONFILES/tmux.conf $HOME/.tmux.conf
     cp $CONFILES/vimrc $HOME/.vimrc
     cp $CONFILES/zshrc $HOME/.zshrc
+    cp $CONFILES/init.vim $HOME/.config/nvim
     
     echo "😎 importing config files complete"
 }

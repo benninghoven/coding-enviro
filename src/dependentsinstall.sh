@@ -3,6 +3,7 @@ InstallDependents(){
     [ -d $HOME/.config ] || mkdir -p $HOME/.config/ && echo "✅ .config directory already exists"
 
     [ ! -d $HOME/.config/zsh ] && mkdir -p $HOME/.config/zsh || echo "zsh config directory already exists"
+
     CONFIG=$HOME/.config
     ZSHFG=$CONFIG/zsh
 
@@ -29,12 +30,8 @@ InstallDependents(){
 
     #FIXME: Throw in neovim Packages
     # Vim-plug for coc and neovim
-    #sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-    #   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-
-    # Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-    # echo restart vim and run :PlugInstall
+    [ -d $HOME/.local/share/nvim ] && echo ✅ vim-plug already installed || { sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'; }
 
     echo 🤖 dependent files done
 }
