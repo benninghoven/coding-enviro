@@ -41,7 +41,7 @@ InstallBrewCasks(){
 # LINUX 🐧
 InstallAPT(){ # assuming we already have APT
     echo 🐧 installing apt packs
-    sudo apt-get update && sudo apt-get dist-upgrade -y &>/dev/null
+    sudo apt-get update -y && sudo apt-get dist-upgrade -y
     TEMPY=$(mktemp)
     APTS=$DEPENDENTS/apts
     apt list --installed > $TEMPY
