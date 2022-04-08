@@ -27,8 +27,6 @@ Plug 'Mofiqul/dracula.nvim'
 
 call plug#end()
 
-:colorscheme dracula
-
 highlight Normal guibg=none
 highlight NonText guibg=none
 

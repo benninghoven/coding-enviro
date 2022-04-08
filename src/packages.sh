@@ -41,14 +41,15 @@ InstallBrewCasks(){
 # LINUX 🐧
 InstallAPT(){ # assuming we already have APT
     echo 🐧 installing apt packs
-    sudo apt-get update -y && sudo apt-get dist-upgrade -y
+    echo "💪 updating and upgrading"
+    sudo apt update -y && sudo apt upgrade
     TEMPY=$(mktemp)
     APTS=$DEPENDENTS/apts
     apt list --installed > $TEMPY
     for PACK in $(cat $APTS)
     do  
 	cat $TEMPY | grep -i $PACK &> /dev/null
-        [ $? == 0 ] && echo ✅ $PACK || sudo apt-get install $PACK -y
+        [ $? == 0 ] && echo ✅ $PACK || sudo apt install $PACK -y
     done
     sudo apt autoremove -y &>/dev/null
     echo 🐧 finished installing apt packs

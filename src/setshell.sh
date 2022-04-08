@@ -1,4 +1,4 @@
 ChangeShellToZsh(){
     # given assuming is already installed
-    [[ ! "$SHELL" == *"zsh"* ]] && chsh -s /bin/zsh || echo "😊 login shell already zsh"
+    [[ ! "$SHELL" == *"zsh"* ]] && { echo "🤖 chaning shell to zsh"; chsh -s /bin/zsh; } || echo "😊 login shell already zsh"
 }
