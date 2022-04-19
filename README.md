@@ -3,7 +3,7 @@
 # Install
 go to the src directory
 '''cd path/to/coding-enviro/src
-run the script with sudo
+run the script
 ```./install.sh```
 
 if you don't have sudo, you will be unable to install needed packages
